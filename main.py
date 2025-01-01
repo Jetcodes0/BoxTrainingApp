@@ -228,7 +228,7 @@ class MyApp(App):
             font_size=18,
             size_hint=(1, 0.1)
         )
-        self.popup_content.add_widget(hits_array_label)
+       
 
         self.popup = Popup(
             title="Entraînement",

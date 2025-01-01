@@ -8,6 +8,7 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from kivy.clock import Clock
 from kivy.core.audio import SoundLoader
+from kivy.core.window import Window
 import random
 
 class MyApp(App):
@@ -34,6 +35,18 @@ class MyApp(App):
             6: SoundLoader.load('son6.mp3')
         }
 
+        self.colors = {
+            "background": (0.95, 0.95, 0.95, 1),
+            "primary": (0.2, 0.6, 1, 1),
+            "secondary": (0.1, 0.4, 0.8, 1),
+            "button_on": (0.3, 0.9, 0.6, 1),
+            "button_off": (1, 0.5, 0.5, 1),
+            "text": (0.2, 0.2, 0.2, 1),
+        }
+
+        # Appliquer une couleur de fond
+        Window.clearcolor = self.colors["background"]
+
         # Layout principal (vertical) pour le titre, les boutons, slider et bouton de validation
         main_layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
 
@@ -41,6 +54,7 @@ class MyApp(App):
         title = Label(
             text="Quelle coup voulez-vous entraîner ?",  # Texte du titre
             font_size=24,
+            color=self.colors["text"],
             size_hint=(1, 0.1)  # Ajuster la hauteur du titre
         )
         main_layout.add_widget(title)
@@ -53,7 +67,7 @@ class MyApp(App):
             toggle = ToggleButton(
                 text=f"Bouton {i}\nOFF",  # Texte initial avec état OFF
                 state="normal",  # État initial
-                background_color=(1, 0.3, 0.3, 1),  # Couleur rouge par défaut
+                background_color=(1, 0.5, 0.5, 1),  # Couleur rouge par défaut
                 font_size=16
             )
             toggle.bind(on_press=self.on_toggle)  # Lier une fonction au clic
@@ -67,15 +81,20 @@ class MyApp(App):
         
         slider_label = Label(
             text="Durée de l'entraînement : 0 sec",
+            color=self.colors["text"],
             font_size=18
         )
         self.slider = Slider(
             min=0,
             max=300,
             step=10,
+            
             value=0
         )
         self.slider.bind(value=lambda instance, value: self.on_slider_value_change(instance, value, slider_label))
+
+        
+        
 
         slider_layout.add_widget(slider_label)
         slider_layout.add_widget(self.slider)
@@ -84,6 +103,7 @@ class MyApp(App):
         # Ajout du deuxième slider pour le nombre de coups
         self.hit_slider_label = Label(
             text="Nombre de coups : 0",
+            color=self.colors["text"],
             font_size=18
         )
         self.hit_slider = Slider(
@@ -115,11 +135,11 @@ class MyApp(App):
         button_number = instance.text.split("\n")[0]  # Récupérer le nom (Bouton X)
         if instance.state == "down":
             instance.text = f"{button_number}\nON"
-            instance.background_color = (0.3, 1, 0.3, 1)  # Couleur verte
+            instance.background_color = (0.3, 0.9, 0.6, 1)  # Couleur verte
             self.selected_buttons.append(button_number)  # Ajouter le bouton sélectionné
         else:
             instance.text = f"{button_number}\nOFF"
-            instance.background_color = (1, 0.3, 0.3, 1)  # Couleur rouge
+            instance.background_color = (1, 0.5, 0.5, 1)  # Couleur rouge
             self.selected_buttons.remove(button_number)  # Retirer le bouton sélectionné
 
     def on_slider_value_change(self, instance, value, label):

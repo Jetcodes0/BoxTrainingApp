@@ -53,7 +53,7 @@ class MyApp(App):
         # Ajout du titre
         title = Label(
             text="Quelle coup voulez-vous entraîner ?",  # Texte du titre
-            font_size=24,
+            font_size=70,
             color=self.colors["text"],
             size_hint=(1, 0.1)  # Ajuster la hauteur du titre
         )
@@ -68,7 +68,7 @@ class MyApp(App):
                 text=f"Bouton {i}\nOFF",  # Texte initial avec état OFF
                 state="normal",  # État initial
                 background_color=(1, 0.5, 0.5, 1),  # Couleur rouge par défaut
-                font_size=16
+                font_size=50
             )
             toggle.bind(on_press=self.on_toggle)  # Lier une fonction au clic
             button_layout.add_widget(toggle)
@@ -82,7 +82,7 @@ class MyApp(App):
         slider_label = Label(
             text="Durée de l'entraînement : 0 sec",
             color=self.colors["text"],
-            font_size=18
+            font_size=50
         )
         self.slider = Slider(
             min=0,
@@ -104,7 +104,7 @@ class MyApp(App):
         self.hit_slider_label = Label(
             text="Nombre de coups : 0",
             color=self.colors["text"],
-            font_size=18
+            font_size=50
         )
         self.hit_slider = Slider(
             min=0,
@@ -200,7 +200,7 @@ class MyApp(App):
         # Affichage des coups sélectionnés
         selected_label = Label(
             text="Coups sélectionnés :\n" + "\n".join(self.selected_buttons),
-            font_size=18,
+            font_size=50,
             size_hint=(1, 0.1)
         )
         self.popup_content.add_widget(selected_label)
@@ -208,7 +208,7 @@ class MyApp(App):
         # Chrono au centre
         self.chrono_label = Label(
             text=f"{duration} sec",  # Temps initial
-            font_size=50,
+            font_size=80,
             size_hint=(1, 0.2),
             color=(1, 1, 1, 1)
         )
@@ -217,7 +217,7 @@ class MyApp(App):
         # Affichage du nombre de coups
         hits_label = Label(
             text=f"Nombre de coups : {self.number_of_hits}",
-            font_size=18,
+            font_size=50,
             size_hint=(1, 0.1)
         )
         self.popup_content.add_widget(hits_label)
@@ -225,7 +225,7 @@ class MyApp(App):
         # Affichage du tableau des coups
         hits_array_label = Label(
             text=f"Tableau des coups : {self.hit_array}",
-            font_size=18,
+            font_size=50,
             size_hint=(1, 0.1)
         )
        
